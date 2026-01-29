@@ -1,104 +1,147 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { Search, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import profileAlex from "@/assets/profile-alex.jpg";
+import profileSarah from "@/assets/profile-sarah.jpg";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 py-20">
-      {/* Background gradient orbs */}
+    <section className="relative min-h-screen flex items-center overflow-hidden px-4 py-20 bg-background">
+      {/* Central gradient glow */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-primary/20 blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-accent/20 blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-primary/10 blur-3xl animate-pulse" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-gradient-to-br from-primary/30 via-accent/20 to-transparent blur-3xl" />
+        <div className="absolute top-1/3 right-1/4 h-80 w-80 rounded-full bg-accent/15 blur-3xl" />
+        <div className="absolute bottom-1/4 left-1/3 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
       </div>
 
-      {/* Grid pattern overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.02]"
-        style={{
-          backgroundImage: `linear-gradient(hsl(var(--primary)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px)`,
-          backgroundSize: '50px 50px'
-        }}
-      />
-
-      <div className="relative z-10 mx-auto max-w-5xl text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 text-sm text-primary"
-        >
-          <Sparkles className="h-4 w-4" />
-          <span>AI-Powered Interview Questions</span>
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
-        >
-          <span className="text-foreground">Streamline Hiring</span>
-          <br />
-          <span className="gradient-text">with AI</span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground sm:text-xl"
-        >
-          Generate intelligent interview questions from job descriptions in seconds.
-          Save hours of preparation and find the perfect candidates faster.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
-        >
-          <Link to="/login">
-            <Button
-              size="lg"
-              className="group relative h-12 overflow-hidden rounded-full gradient-primary px-8 text-lg font-semibold text-primary-foreground transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/25"
-            >
-              <span className="relative z-10 flex items-center gap-2">
-                Get Started
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-accent to-primary opacity-0 transition-opacity group-hover:opacity-100" />
-            </Button>
-          </Link>
-          <Button
-            variant="outline"
-            size="lg"
-            className="h-12 rounded-full border-border/50 px-8 text-lg hover:bg-muted"
+      <div className="relative z-10 mx-auto max-w-7xl w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left Column - Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-8"
           >
-            Learn More
-          </Button>
-        </motion.div>
+            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
+              <span className="text-foreground">Connecting Top Talent</span>
+              <br />
+              <span className="text-foreground">with Leading</span>
+              <br />
+              <span className="text-foreground">Companies</span>
+            </h1>
 
-        {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-20 grid grid-cols-3 gap-8"
-        >
-          {[
-            { value: "10K+", label: "Interviews Prepared" },
-            { value: "500+", label: "Companies Trust Us" },
-            { value: "95%", label: "Time Saved" },
-          ].map((stat, index) => (
-            <div key={index} className="text-center">
-              <div className="text-3xl font-bold gradient-text sm:text-4xl">{stat.value}</div>
-              <div className="mt-1 text-sm text-muted-foreground">{stat.label}</div>
+            <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
+              Streamline your hiring process. Find the perfect match for your team with our AI-powered platform. Verified skills, proven experience.
+            </p>
+
+            {/* Search Bar */}
+            <div className="flex items-center gap-0 max-w-xl">
+              <div className="relative flex-1">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                <Input
+                  type="text"
+                  placeholder="Search for roles, skills, or candidates..."
+                  className="h-14 pl-12 pr-4 rounded-l-full rounded-r-none border-r-0 bg-card/80 border-border/50 text-foreground placeholder:text-muted-foreground focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-primary/50"
+                />
+              </div>
+              <Link to="/login">
+                <Button
+                  className="h-14 px-6 rounded-l-none rounded-r-full bg-card border border-border/50 border-l-0 text-foreground hover:bg-muted font-semibold tracking-wide text-sm"
+                >
+                  FIND A DEVELOPER
+                </Button>
+              </Link>
             </div>
-          ))}
-        </motion.div>
+
+            {/* Trust Section */}
+            <div className="space-y-2">
+              <p className="text-muted-foreground font-medium">
+                Trusted by <span className="text-foreground">50k+ users</span>
+              </p>
+              <div className="flex items-center gap-2">
+                <div className="flex items-center">
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`h-5 w-5 ${i < 4 ? "fill-primary text-primary" : "fill-primary/50 text-primary/50"}`}
+                    />
+                  ))}
+                </div>
+                <span className="text-foreground font-semibold">4.1/5</span>
+                <span className="text-muted-foreground">(14k Reviews)</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right Column - Profile Images with Connecting Line */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative hidden lg:flex justify-center items-center min-h-[500px]"
+          >
+            {/* Connecting Line SVG */}
+            <svg
+              className="absolute inset-0 w-full h-full"
+              viewBox="0 0 400 500"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="hsl(var(--primary))" />
+                  <stop offset="100%" stopColor="hsl(var(--accent))" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M 200 120 L 200 180 L 260 300 L 200 380"
+                stroke="url(#lineGradient)"
+                strokeWidth="3"
+                fill="none"
+                className="drop-shadow-[0_0_10px_hsl(var(--primary)/0.5)]"
+              />
+            </svg>
+
+            {/* Top Profile - Alex Chen */}
+            <div className="absolute top-8 left-1/2 -translate-x-1/2 flex flex-col items-center">
+              <div className="text-right mb-3 self-start -ml-24">
+                <p className="text-foreground font-semibold">Alex Chen</p>
+                <p className="text-muted-foreground text-sm">Senior Architect</p>
+              </div>
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/50 to-accent/50 blur-md scale-110" />
+                <div className="relative w-40 h-40 rounded-full overflow-hidden border-4 border-primary/30 ring-2 ring-accent/20 ring-offset-4 ring-offset-background">
+                  <img
+                    src={profileAlex}
+                    alt="Alex Chen - Senior Architect"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Profile - Sarah Jenkins */}
+            <div className="absolute bottom-8 right-12 flex flex-col items-center">
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent/50 to-primary/50 blur-md scale-110" />
+                <div className="relative w-36 h-36 rounded-full overflow-hidden border-4 border-accent/30 ring-2 ring-primary/20 ring-offset-4 ring-offset-background">
+                  <img
+                    src={profileSarah}
+                    alt="Sarah Jenkins - Talent Acquisition Lead"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+              <div className="text-center mt-3">
+                <p className="text-foreground font-semibold">Sarah Jenkins</p>
+                <p className="text-muted-foreground text-sm">Talent Acquisition Lead</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
