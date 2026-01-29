@@ -10,9 +10,9 @@ export function Navbar() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50"
+      className="fixed top-4 left-4 right-4 z-50"
     >
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
+      <nav className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6 rounded-full bg-card/60 backdrop-blur-xl border border-border/30 shadow-lg">
         <Link to="/" className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg gradient-primary">
             <Sparkles className="h-4 w-4 text-primary-foreground" />

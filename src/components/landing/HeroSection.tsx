@@ -76,7 +76,7 @@ export function HeroSection() {
             </div>
           </motion.div>
 
-          {/* Right Column - Profile Images with Connecting Line */}
+          {/* Right Column - Profile Images with Connecting Line (Desktop) */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -142,6 +142,72 @@ export function HeroSection() {
             </div>
           </motion.div>
         </div>
+
+        {/* Mobile Profile Images Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="lg:hidden relative mt-12 flex justify-center items-center min-h-[400px]"
+        >
+          {/* Connecting Line SVG - Mobile */}
+          <svg
+            className="absolute inset-0 w-full h-full"
+            viewBox="0 0 300 400"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <linearGradient id="lineGradientMobile" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="hsl(var(--primary))" />
+                <stop offset="100%" stopColor="hsl(var(--accent))" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M 100 100 L 100 150 L 200 250 L 200 320"
+              stroke="url(#lineGradientMobile)"
+              strokeWidth="3"
+              fill="none"
+              className="drop-shadow-[0_0_10px_hsl(var(--primary)/0.5)]"
+            />
+          </svg>
+
+          {/* Top Profile - Alex Chen */}
+          <div className="absolute top-0 left-8 flex flex-col items-center">
+            <div className="text-left mb-2">
+              <p className="text-foreground font-semibold text-sm">Alex Chen</p>
+              <p className="text-muted-foreground text-xs">Senior Architect</p>
+            </div>
+            <div className="relative">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/50 to-accent/50 blur-md scale-110" />
+              <div className="relative w-28 h-28 rounded-full overflow-hidden border-4 border-primary/30 ring-2 ring-accent/20 ring-offset-2 ring-offset-background">
+                <img
+                  src={profileAlex}
+                  alt="Alex Chen - Senior Architect"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Profile - Sarah Jenkins */}
+          <div className="absolute bottom-0 right-8 flex flex-col items-center">
+            <div className="relative">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent/50 to-primary/50 blur-md scale-110" />
+              <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-accent/30 ring-2 ring-primary/20 ring-offset-2 ring-offset-background">
+                <img
+                  src={profileSarah}
+                  alt="Sarah Jenkins - Talent Acquisition Lead"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+            <div className="text-center mt-2">
+              <p className="text-foreground font-semibold text-sm">Sarah Jenkins</p>
+              <p className="text-muted-foreground text-xs">Talent Acquisition Lead</p>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
