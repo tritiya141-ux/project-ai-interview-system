@@ -103,28 +103,6 @@ export function HeroSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative hidden lg:flex justify-center items-center min-h-[500px]"
           >
-            {/* Connecting Line SVG */}
-            <svg
-              className="absolute inset-0 w-full h-full"
-              viewBox="0 0 400 500"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="hsl(var(--primary))" />
-                  <stop offset="100%" stopColor="hsl(var(--accent))" />
-                </linearGradient>
-              </defs>
-              <path
-                d="M 200 120 L 200 180 L 260 300 L 200 380"
-                stroke="url(#lineGradient)"
-                strokeWidth="3"
-                fill="none"
-                className="drop-shadow-[0_0_10px_hsl(var(--primary)/0.5)]"
-              />
-            </svg>
-
             {/* Top Profile - Alex Chen */}
             <div className="absolute top-8 left-1/2 -translate-x-1/2 flex flex-col items-center">
               <div className="text-right mb-3 self-start -ml-24">
@@ -170,28 +148,6 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="lg:hidden relative mt-6 md:mt-12 flex justify-center items-center min-h-[280px] sm:min-h-[320px]"
         >
-          {/* Connecting Line SVG - Mobile (adjusted for smaller avatars) */}
-          <svg
-            className="absolute inset-0 w-full h-full"
-            viewBox="0 0 300 280"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <linearGradient id="lineGradientMobile" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="hsl(var(--primary))" />
-                <stop offset="100%" stopColor="hsl(var(--accent))" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M 80 70 L 80 110 L 180 180 L 180 230"
-              stroke="url(#lineGradientMobile)"
-              strokeWidth="2"
-              fill="none"
-              className="drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]"
-            />
-          </svg>
-
           {/* Top Profile - Alex Chen */}
           <div className="absolute top-0 left-6 sm:left-8 flex flex-col items-center">
             <div className="text-left mb-1.5">
