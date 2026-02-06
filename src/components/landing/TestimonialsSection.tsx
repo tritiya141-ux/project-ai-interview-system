@@ -33,7 +33,7 @@ const testimonials = [
 
 export function TestimonialsSection() {
   return (
-    <section id="testimonials" className="min-h-screen py-24 px-4 bg-background rounded-t-[2.5rem] shadow-2xl">
+    <section id="testimonials" className="min-h-screen py-16 md:py-24 px-4 bg-background rounded-t-[2.5rem] shadow-2xl">
       <div className="mx-auto max-w-6xl">
         {/* Header */}
         <motion.div
@@ -41,13 +41,13 @@ export function TestimonialsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
-          <h2 className="font-display text-4xl font-bold sm:text-5xl lg:text-6xl tracking-tight">
+          <h2 className="font-display text-3xl font-bold sm:text-4xl lg:text-6xl tracking-tight">
             <span className="text-foreground">What Users</span>{" "}
             <span className="text-muted-foreground/40">Say.</span>
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="mt-3 md:mt-4 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
             See how our platform has transformed hiring for companies of all sizes.
           </p>
         </motion.div>
