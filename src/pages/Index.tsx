@@ -3,6 +3,7 @@ import { HeroSection } from "@/components/landing/HeroSection";
 import { MacbookScrollDemo } from "@/components/landing/MacbookScrollDemo";
 import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
 import { HowItWorksSection } from "@/components/landing/HowItWorksSection";
+import { FAQSection } from "@/components/landing/FAQSection";
 import { Footer } from "@/components/landing/Footer";
 import { StickySection } from "@/components/landing/StickySection";
 
@@ -28,6 +29,9 @@ const Index = () => {
         <StickySection zIndex={30} isLast>
           <HowItWorksSection />
         </StickySection>
+        
+        {/* FAQ - Normal scroll, not sticky */}
+        <FAQSection />
       </main>
       <Footer />
     </div>
