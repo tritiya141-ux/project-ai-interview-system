@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, Variants } from "framer-motion";
 import { FileText, Cpu, CheckCircle } from "lucide-react";
 import { useRef } from "react";
 
@@ -20,7 +20,7 @@ const steps = [
   },
 ];
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -31,7 +31,7 @@ const containerVariants = {
   },
 };
 
-const stepVariants = {
+const stepVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
@@ -40,11 +40,11 @@ const stepVariants = {
       type: "spring",
       stiffness: 60,
       damping: 15,
-    },
+    } as const,
   },
 };
 
-const badgeVariants = {
+const badgeVariants: Variants = {
   hidden: { scale: 0, opacity: 0 },
   visible: {
     scale: 1,
@@ -54,18 +54,18 @@ const badgeVariants = {
       stiffness: 200,
       damping: 10,
       delay: 0.2,
-    },
+    } as const,
   },
 };
 
-const lineVariants = {
+const lineVariants: Variants = {
   hidden: { scaleX: 0, opacity: 0 },
   visible: {
     scaleX: 1,
     opacity: 1,
     transition: {
       duration: 0.6,
-      ease: [0.22, 1, 0.36, 1],
+      ease: [0.22, 1, 0.36, 1] as const,
     },
   },
 };
