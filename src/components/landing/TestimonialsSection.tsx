@@ -53,9 +53,9 @@ export function TestimonialsSection() {
         </motion.div>
 
         {/* Testimonial Grid - Staggered Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-4xl mx-auto">
           {/* Left Column */}
-          <div className="space-y-8">
+          <div className="space-y-4 md:space-y-8">
             {/* Card 1 - Top Left */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
