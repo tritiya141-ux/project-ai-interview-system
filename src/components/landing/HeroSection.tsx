@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Search, Star } from "lucide-react";
+import { Search, Star, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import profileAlex from "@/assets/profile-alex.jpg";
@@ -9,6 +9,9 @@ import profileSarah from "@/assets/profile-sarah.jpg";
 export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden px-4 py-20 bg-background">
+      {/* Dot Grid Pattern Background */}
+      <div className="absolute inset-0 bg-dot-grid" />
+      
       {/* Central gradient glow */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-gradient-to-br from-primary/30 via-accent/20 to-transparent blur-3xl" />
@@ -25,39 +28,67 @@ export function HeroSection() {
             transition={{ duration: 0.6 }}
             className="space-y-8"
           >
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
-              <span className="text-foreground">Connecting Top Talent</span>
-              <br />
-              <span className="text-foreground">with Leading</span>
-              <br />
-              <span className="text-foreground">Companies</span>
-            </h1>
+            {/* Two-Tone Industrial Typography */}
+            <div className="space-y-1">
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.9]"
+              >
+                <span className="text-foreground">HireHand AI.</span>
+              </motion.h1>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.9] text-muted-foreground/40"
+              >
+                Recruiting Reinvented.
+              </motion.h2>
+            </div>
 
-            <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
-              Streamline your hiring process. Find the perfect match for your team with our AI-powered platform. Verified skills, proven experience.
-            </p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed"
+            >
+              The only AI-powered platform that parses JDs, generates interview questions, and ranks talent instantly.
+            </motion.p>
 
             {/* Search Bar */}
-            <div className="flex items-center gap-0 max-w-xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex items-center gap-0 max-w-xl"
+            >
               <div className="relative flex-1">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 <Input
                   type="text"
                   placeholder="Search for roles, skills, or candidates..."
-                  className="h-14 pl-12 pr-4 rounded-l-full rounded-r-none border-r-0 bg-card/80 border-border/50 text-foreground placeholder:text-muted-foreground focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-primary/50"
+                  className="h-14 pl-12 pr-4 rounded-l-full rounded-r-none border-r-0 bg-card/80 border-border/50 text-foreground placeholder:text-muted-foreground focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-primary/50 font-display"
                 />
               </div>
               <Link to="/login">
                 <Button
-                  className="h-14 px-6 rounded-l-none rounded-r-full bg-card border border-border/50 border-l-0 text-foreground hover:bg-muted font-semibold tracking-wide text-sm"
+                  className="h-14 px-6 rounded-l-none rounded-r-full gradient-primary text-primary-foreground font-display font-semibold tracking-wide text-sm gap-2"
                 >
-                  FIND A DEVELOPER
+                  GET STARTED
+                  <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
-            </div>
+            </motion.div>
 
             {/* Trust Section */}
-            <div className="space-y-2">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="space-y-2"
+            >
               <p className="text-muted-foreground font-medium">
                 Trusted by <span className="text-foreground">50k+ users</span>
               </p>
@@ -70,10 +101,10 @@ export function HeroSection() {
                     />
                   ))}
                 </div>
-                <span className="text-foreground font-semibold">4.1/5</span>
+                <span className="text-foreground font-semibold">4.5/5</span>
                 <span className="text-muted-foreground">(14k Reviews)</span>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Right Column - Profile Images with Connecting Line (Desktop) */}

@@ -135,4 +135,18 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .font-display {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .bg-dot-grid {
+    background-image: radial-gradient(circle, hsl(var(--foreground) / 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .bg-dot-grid-light {
+    background-image: radial-gradient(circle, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
 }
