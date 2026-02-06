@@ -33,7 +33,7 @@ const testimonials = [
 
 export function TestimonialsSection() {
   return (
-    <section id="testimonials" className="min-h-screen py-24 px-4 bg-card rounded-t-[2.5rem] shadow-2xl">
+    <section id="testimonials" className="min-h-screen py-24 px-4 bg-background rounded-t-[2.5rem] shadow-2xl">
       <div className="mx-auto max-w-6xl">
         {/* Header */}
         <motion.div
@@ -116,7 +116,7 @@ interface TestimonialCardProps {
 
 function TestimonialCard({ testimonial }: TestimonialCardProps) {
   return (
-    <div className="bg-background rounded-2xl p-6 shadow-lg border border-border/30 hover:shadow-xl transition-shadow duration-300">
+    <div className="bg-secondary rounded-2xl p-6 shadow-lg border border-border hover:shadow-xl transition-shadow duration-300">
       <p className="text-foreground leading-relaxed mb-6">
         "{testimonial.quote}"
       </p>

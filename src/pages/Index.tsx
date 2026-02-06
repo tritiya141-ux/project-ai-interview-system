@@ -20,14 +20,13 @@ const Index = () => {
           <FeaturesSection />
         </StickySection>
         
-        <StickySection zIndex={20} isLast>
+        <StickySection zIndex={20}>
           <TestimonialsSection />
         </StickySection>
         
-        {/* Non-sticky sections */}
-        <div className="relative z-30">
+        <StickySection zIndex={30} isLast>
           <HowItWorksSection />
-        </div>
+        </StickySection>
       </main>
       <Footer />
     </div>

@@ -9,7 +9,7 @@ import profileSarah from "@/assets/profile-sarah.jpg";
 export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden px-4 py-20 bg-background">
-      {/* Dot Grid Pattern Background */}
+      {/* Dot Grid Pattern Background - on top of solid bg */}
       <div className="absolute inset-0 bg-dot-grid" />
       
       {/* Central gradient glow */}

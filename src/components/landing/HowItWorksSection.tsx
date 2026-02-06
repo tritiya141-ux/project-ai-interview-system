@@ -21,7 +21,7 @@ const steps = [
 
 export function HowItWorksSection() {
   return (
-    <section className="relative py-20 px-4">
+    <section id="how-it-works" className="relative min-h-screen py-24 px-4 bg-secondary rounded-t-[2.5rem] shadow-2xl">
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -30,8 +30,9 @@ export function HowItWorksSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl font-bold sm:text-4xl lg:text-5xl">
-            How It <span className="gradient-text">Works</span>
+          <h2 className="font-display text-4xl font-bold sm:text-5xl lg:text-6xl tracking-tight">
+            <span className="text-foreground">How It</span>{" "}
+            <span className="text-muted-foreground/40">Works.</span>
           </h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
             Get interview-ready in three simple steps.
@@ -53,7 +54,7 @@ export function HowItWorksSection() {
                 <div className="hidden md:block absolute top-12 left-[60%] w-[80%] h-px bg-gradient-to-r from-primary/50 to-accent/50" />
               )}
 
-              <div className="relative mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-2xl glass border-primary/20">
+              <div className="relative mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-card border border-border">
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20" />
                 <step.icon className="relative h-10 w-10 text-primary" />
                 <div className="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full gradient-primary text-sm font-bold text-primary-foreground">
