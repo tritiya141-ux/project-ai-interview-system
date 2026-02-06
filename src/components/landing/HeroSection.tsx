@@ -26,10 +26,10 @@ export function HeroSection() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="space-y-8"
+            className="space-y-4 md:space-y-8"
           >
             {/* Two-Tone Industrial Typography */}
-            <div className="space-y-1">
+            <div className="space-y-0.5 md:space-y-1">
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
