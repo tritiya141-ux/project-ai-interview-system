@@ -1,5 +1,6 @@
 import React from "react";
 import { MacbookScroll } from "@/components/ui/macbook-scroll";
+import { PointerHighlight } from "@/components/ui/pointer-highlight";
 import { Sparkles } from "lucide-react";
 import dashboardImage from "@/assets/dashboard-preview.png";
 
@@ -17,7 +18,14 @@ export function MacbookScrollDemo() {
           title={
             <div className="flex flex-col items-center gap-4">
               <span className="text-4xl md:text-5xl font-bold text-white font-display tracking-tight">
-                The Ultimate AI Recruiting Engine.
+                The Ultimate{" "}
+                <PointerHighlight
+                  rectangleClassName="bg-primary/25 border border-primary/40"
+                  pointerClassName="text-primary"
+                >
+                  AI Recruiting Engine
+                </PointerHighlight>
+                .
               </span>
               <span className="text-lg md:text-xl text-muted-foreground max-w-2xl">
                 Scroll to see how HireHand AI transforms a simple JD into a complete interview kit.
