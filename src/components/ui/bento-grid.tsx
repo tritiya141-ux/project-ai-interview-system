@@ -39,26 +39,26 @@ export function BentoCard({
   return (
     <div
       className={cn(
-        "group relative flex flex-col justify-between overflow-hidden rounded-xl",
-        "glass border border-border/50",
-        "transform-gpu transition-all duration-300",
-        "hover:border-primary/30 hover:glow-sm hover:scale-[1.02]",
+        "group relative flex flex-col justify-between overflow-hidden rounded-xl cursor-pointer",
+        "bg-card border border-border/50",
+        "transform-gpu transition-all duration-300 ease-out",
+        "hover:-translate-y-2 hover:border-primary/50 hover:shadow-[0_0_30px_-5px_hsl(var(--primary)/0.3)]",
         className
       )}
     >
-      <div className="absolute inset-0 opacity-20 transition-opacity group-hover:opacity-30">
+      <div className="absolute inset-0 opacity-20 transition-opacity duration-300 group-hover:opacity-40">
         {background}
       </div>
       <div className="relative z-10 flex flex-col gap-4 p-6">
-        <div className="flex h-12 w-12 items-center justify-center rounded-lg gradient-primary">
+        <div className="flex h-12 w-12 items-center justify-center rounded-lg gradient-primary transition-transform duration-300 group-hover:scale-110">
           <Icon className="h-6 w-6 text-primary-foreground" />
         </div>
         <div>
-          <h3 className="text-xl font-semibold text-foreground">{name}</h3>
+          <h3 className="text-xl font-semibold text-foreground transition-colors duration-300 group-hover:text-primary">{name}</h3>
           <p className="mt-2 text-muted-foreground">{description}</p>
         </div>
       </div>
-      <div className="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 group-hover:bg-primary/5" />
+      <div className="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-primary/10 group-hover:to-transparent" />
     </div>
   );
 }

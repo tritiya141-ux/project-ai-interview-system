@@ -57,19 +57,19 @@ export function Navbar() {
         >
           <a 
             href="#features" 
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
+            className="relative text-sm text-muted-foreground transition-all duration-300 whitespace-nowrap hover:text-primary after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
           >
             Features
           </a>
           <a 
             href="#testimonials" 
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
+            className="relative text-sm text-muted-foreground transition-all duration-300 whitespace-nowrap hover:text-primary after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
           >
             Testimonials
           </a>
           <a 
             href="#how-it-works" 
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
+            className="relative text-sm text-muted-foreground transition-all duration-300 whitespace-nowrap hover:text-primary after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
           >
             How It Works
           </a>
