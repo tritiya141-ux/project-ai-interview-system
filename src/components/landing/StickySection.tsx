@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { useRef, ReactNode } from "react";
 
 interface StickySectionProps {
@@ -6,6 +6,18 @@ interface StickySectionProps {
   className?: string;
   zIndex: number;
   isLast?: boolean;
+}
+
+function useParallaxTransform(value: MotionValue<number>, isLast: boolean) {
+  const scale = useTransform(value, [0, 0.5, 1], [1, 1, 0.92]);
+  const opacity = useTransform(value, [0, 0.6, 1], [1, 1, 0.4]);
+  const y = useTransform(value, [0, 1], [0, -30]);
+  
+  if (isLast) {
+    return { scale: 1, opacity: 1, y: 0 };
+  }
+  
+  return { scale, opacity, y };
 }
 
 export function StickySection({ children, className = "", zIndex, isLast = false }: StickySectionProps) {
@@ -16,24 +28,17 @@ export function StickySection({ children, className = "", zIndex, isLast = false
     offset: ["start start", "end start"]
   });
 
-  // Scale down and dim when being covered by next section
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1, 0.92]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1, 0.4]);
-  const brightness = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1, 0.5]);
+  const transforms = useParallaxTransform(scrollYProgress, isLast);
 
   return (
     <div 
       ref={sectionRef}
-      className="sticky top-0 w-full"
+      className="sticky top-0 w-full will-change-transform"
       style={{ zIndex }}
     >
       <motion.div
-        style={isLast ? {} : { 
-          scale, 
-          opacity,
-          filter: brightness.get() < 1 ? `brightness(${brightness.get()})` : undefined
-        }}
-        className={`w-full origin-center ${className}`}
+        style={isLast ? {} : transforms}
+        className={`w-full origin-top ${className}`}
       >
         {children}
       </motion.div>

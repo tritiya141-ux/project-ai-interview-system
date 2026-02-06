@@ -33,7 +33,7 @@ const testimonials = [
 
 export function TestimonialsSection() {
   return (
-    <section className="py-24 px-4 bg-card">
+    <section id="testimonials" className="min-h-screen py-24 px-4 bg-card rounded-t-[2.5rem] shadow-2xl">
       <div className="mx-auto max-w-6xl">
         {/* Header */}
         <motion.div
@@ -43,8 +43,9 @@ export function TestimonialsSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl font-bold sm:text-4xl lg:text-5xl text-foreground">
-            What Users Say About Us
+          <h2 className="font-display text-4xl font-bold sm:text-5xl lg:text-6xl tracking-tight">
+            <span className="text-foreground">What Users</span>{" "}
+            <span className="text-muted-foreground/40">Say.</span>
           </h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
             See how our platform has transformed hiring for companies of all sizes.
