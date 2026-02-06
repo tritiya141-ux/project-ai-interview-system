@@ -52,7 +52,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed"
+              className="text-sm md:text-lg text-muted-foreground max-w-xl leading-relaxed"
             >
               The only AI-powered platform that parses JDs, generates interview questions, and ranks talent instantly.
             </motion.p>
