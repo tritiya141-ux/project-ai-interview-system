@@ -116,7 +116,7 @@ interface TestimonialCardProps {
 
 function TestimonialCard({ testimonial }: TestimonialCardProps) {
   return (
-    <div className="bg-background rounded-2xl p-6 shadow-lg border border-border/30 hover:shadow-xl transition-shadow duration-300">
+    <div className="bg-secondary dark:bg-neutral-900 rounded-2xl p-6 shadow-lg border border-border hover:shadow-xl transition-shadow duration-300">
       <p className="text-foreground leading-relaxed mb-6">
         "{testimonial.quote}"
       </p>
