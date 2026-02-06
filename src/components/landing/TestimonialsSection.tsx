@@ -116,20 +116,20 @@ interface TestimonialCardProps {
 
 function TestimonialCard({ testimonial }: TestimonialCardProps) {
   return (
-    <div className="bg-secondary rounded-2xl p-6 shadow-lg border border-border hover:shadow-xl transition-shadow duration-300">
+    <div className="group bg-secondary rounded-2xl p-6 shadow-lg border border-border cursor-pointer transform-gpu transition-all duration-300 ease-out hover:-translate-y-2 hover:border-primary/50 hover:shadow-[0_0_30px_-5px_hsl(var(--primary)/0.3)]">
       <p className="text-foreground leading-relaxed mb-6">
         "{testimonial.quote}"
       </p>
       <div className="flex items-center gap-3">
-        <div className="w-12 h-12 rounded-full overflow-hidden">
+        <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-transparent transition-all duration-300 group-hover:ring-primary/50 group-hover:ring-offset-2 group-hover:ring-offset-secondary">
           <img
             src={testimonial.image}
             alt={testimonial.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
           />
         </div>
         <div>
-          <p className="font-semibold text-foreground">{testimonial.name}</p>
+          <p className="font-semibold text-foreground transition-colors duration-300 group-hover:text-primary">{testimonial.name}</p>
           <p className="text-sm text-muted-foreground">{testimonial.role}</p>
         </div>
       </div>
