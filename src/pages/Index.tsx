@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/landing/Navbar";
 import { HeroSection } from "@/components/landing/HeroSection";
-import { MacbookScrollDemo } from "@/components/landing/MacbookScrollDemo";
+import { FeatureShowcase } from "@/components/landing/FeatureShowcase";
 import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
 import { HowItWorksSection } from "@/components/landing/HowItWorksSection";
 import { Footer } from "@/components/landing/Footer";
@@ -16,8 +16,8 @@ const Index = () => {
           <HeroSection />
         </StickySection>
         
-        {/* Macbook Scroll Feature Showcase */}
-        <MacbookScrollDemo />
+        {/* 3D Container Scroll Feature Showcase */}
+        <FeatureShowcase />
         
         {/* Testimonials */}
         <StickySection zIndex={20}>
