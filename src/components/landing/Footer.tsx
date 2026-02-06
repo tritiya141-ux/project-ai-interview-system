@@ -3,7 +3,7 @@ import { Sparkles } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/50 py-12 px-4">
+    <footer className="relative z-50 bg-background border-t border-border py-12 px-4">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-8 md:grid-cols-4">
           <div className="md:col-span-2">
@@ -11,7 +11,7 @@ export function Footer() {
               <div className="flex h-8 w-8 items-center justify-center rounded-lg gradient-primary">
                 <Sparkles className="h-4 w-4 text-primary-foreground" />
               </div>
-              <span className="text-xl font-bold gradient-text">InterviewAI</span>
+              <span className="text-xl font-extrabold tracking-tight gradient-text">HireHand AI</span>
             </Link>
             <p className="mt-4 text-muted-foreground max-w-sm">
               Streamline your hiring process with AI-powered interview question generation.
@@ -37,9 +37,9 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} InterviewAI. All rights reserved.
+            © {new Date().getFullYear()} HireHand AI. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm text-muted-foreground">
             <Link to="/login" className="hover:text-primary transition-colors">Privacy</Link>
