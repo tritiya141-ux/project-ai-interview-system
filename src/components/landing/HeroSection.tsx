@@ -170,10 +170,10 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="lg:hidden relative mt-6 md:mt-12 flex justify-center items-center min-h-[280px] sm:min-h-[320px]"
         >
-          {/* Connecting Line SVG - Mobile */}
+          {/* Connecting Line SVG - Mobile (adjusted for smaller avatars) */}
           <svg
             className="absolute inset-0 w-full h-full"
-            viewBox="0 0 300 400"
+            viewBox="0 0 300 280"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -184,11 +184,11 @@ export function HeroSection() {
               </linearGradient>
             </defs>
             <path
-              d="M 100 100 L 100 150 L 200 250 L 200 320"
+              d="M 80 70 L 80 110 L 180 180 L 180 230"
               stroke="url(#lineGradientMobile)"
-              strokeWidth="3"
+              strokeWidth="2"
               fill="none"
-              className="drop-shadow-[0_0_10px_hsl(var(--primary)/0.5)]"
+              className="drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]"
             />
           </svg>
 
