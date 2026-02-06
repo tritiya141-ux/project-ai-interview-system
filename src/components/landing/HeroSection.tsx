@@ -211,10 +211,10 @@ export function HeroSection() {
           </div>
 
           {/* Bottom Profile - Sarah Jenkins */}
-          <div className="absolute bottom-0 right-8 flex flex-col items-center">
+          <div className="absolute bottom-0 right-6 sm:right-8 flex flex-col items-center">
             <div className="relative">
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent/50 to-primary/50 blur-md scale-110" />
-              <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-accent/30 ring-2 ring-primary/20 ring-offset-2 ring-offset-background">
+              <div className="relative w-14 h-14 sm:w-18 sm:h-18 rounded-full overflow-hidden border-2 sm:border-4 border-accent/30 ring-1 sm:ring-2 ring-primary/20 ring-offset-1 sm:ring-offset-2 ring-offset-background">
                 <img
                   src={profileSarah}
                   alt="Sarah Jenkins - Talent Acquisition Lead"
@@ -222,9 +222,9 @@ export function HeroSection() {
                 />
               </div>
             </div>
-            <div className="text-center mt-2">
-              <p className="text-foreground font-semibold text-sm">Sarah Jenkins</p>
-              <p className="text-muted-foreground text-xs">Talent Acquisition Lead</p>
+            <div className="text-center mt-1.5">
+              <p className="text-foreground font-semibold text-xs sm:text-sm">Sarah Jenkins</p>
+              <p className="text-muted-foreground text-[10px] sm:text-xs">Talent Acquisition Lead</p>
             </div>
           </div>
         </motion.div>
