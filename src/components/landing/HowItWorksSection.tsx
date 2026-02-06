@@ -21,7 +21,7 @@ const steps = [
 
 export function HowItWorksSection() {
   return (
-    <section className="relative py-20 px-4">
+    <section id="how-it-works" className="relative min-h-screen py-24 px-4 bg-secondary dark:bg-neutral-900 rounded-t-[2.5rem] shadow-2xl">
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -30,8 +30,9 @@ export function HowItWorksSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl font-bold sm:text-4xl lg:text-5xl">
-            How It <span className="gradient-text">Works</span>
+          <h2 className="font-display text-4xl font-bold sm:text-5xl lg:text-6xl tracking-tight">
+            <span className="text-foreground">How It</span>{" "}
+            <span className="text-muted-foreground/40">Works.</span>
           </h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
             Get interview-ready in three simple steps.
