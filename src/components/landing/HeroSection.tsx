@@ -76,7 +76,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="space-y-2"
+              className="space-y-1 md:space-y-2"
             >
               <p className="text-muted-foreground font-medium">
                 Trusted by <span className="text-foreground">50k+ users</span>
