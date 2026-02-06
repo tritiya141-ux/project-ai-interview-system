@@ -1,8 +1,9 @@
 import { Navbar } from "@/components/landing/Navbar";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { MacbookScrollDemo } from "@/components/landing/MacbookScrollDemo";
-import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
+import { FeaturesSection } from "@/components/landing/FeaturesSection";
 import { HowItWorksSection } from "@/components/landing/HowItWorksSection";
+import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
 import { FAQSection } from "@/components/landing/FAQSection";
 import { Footer } from "@/components/landing/Footer";
 import { StickySection } from "@/components/landing/StickySection";
@@ -12,27 +13,31 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <main className="pt-16">
-        {/* Hero Section */}
+        {/* 1. Hero Section */}
         <StickySection zIndex={0}>
           <HeroSection />
         </StickySection>
         
-        {/* Macbook Scroll Feature Showcase */}
+        {/* 2. Product Showcase - Macbook Scroll */}
         <MacbookScrollDemo />
         
-        {/* Testimonials */}
-        <StickySection zIndex={20}>
-          <TestimonialsSection />
-        </StickySection>
+        {/* 3. Features Section - Animated Bento Grid */}
+        <FeaturesSection />
         
-        {/* How It Works */}
-        <StickySection zIndex={30} isLast>
+        {/* 4. How It Works */}
+        <StickySection zIndex={20}>
           <HowItWorksSection />
         </StickySection>
         
-        {/* FAQ - Normal scroll, not sticky */}
+        {/* 5. Testimonials */}
+        <StickySection zIndex={30} isLast>
+          <TestimonialsSection />
+        </StickySection>
+        
+        {/* 6. FAQ - Normal scroll */}
         <FAQSection />
       </main>
+      {/* 7. Footer */}
       <Footer />
     </div>
   );
