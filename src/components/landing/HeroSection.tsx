@@ -8,8 +8,8 @@ import profileSarah from "@/assets/profile-sarah.jpg";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex flex-col justify-between overflow-hidden px-4 py-8 md:py-20 pb-4 md:pb-20 bg-background">
-      {/* Dot Grid Pattern Background - on top of solid bg */}
+    <section className="relative min-h-screen flex flex-col justify-between overflow-hidden px-4 py-6 md:py-20 pb-8 md:pb-20 bg-background">
+      {/* Dot Grid Pattern Background */}
       <div className="absolute inset-0 bg-dot-grid" />
       
       {/* Central gradient glow */}
@@ -19,14 +19,17 @@ export function HeroSection() {
         <div className="absolute bottom-1/4 left-1/3 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      {/* Main Content Container */}
+      <div className="relative z-10 mx-auto max-w-7xl w-full flex-1 flex flex-col justify-between">
+        
+        {/* TOP SECTION: Headline & CTA */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Column - Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="space-y-4 md:space-y-8"
+            className="space-y-4 md:space-y-6"
           >
             {/* Two-Tone Industrial Typography */}
             <div className="space-y-0.5 md:space-y-1">
@@ -78,7 +81,7 @@ export function HeroSection() {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="space-y-1 md:space-y-2"
             >
-              <p className="text-muted-foreground font-medium">
+              <p className="text-muted-foreground font-medium text-sm md:text-base">
                 Trusted by <span className="text-foreground">50k+ users</span>
               </p>
               <div className="flex items-center gap-1.5 md:gap-2">
@@ -96,35 +99,13 @@ export function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right Column - Profile Images with Connecting Line (Desktop) */}
+          {/* Right Column - Profile Images (Desktop Only) */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative hidden lg:flex justify-center items-center min-h-[500px]"
           >
-            {/* Connecting Line SVG */}
-            <svg
-              className="absolute inset-0 w-full h-full"
-              viewBox="0 0 400 500"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="hsl(var(--primary))" />
-                  <stop offset="100%" stopColor="hsl(var(--accent))" />
-                </linearGradient>
-              </defs>
-              <path
-                d="M 200 120 L 200 180 L 260 300 L 200 380"
-                stroke="url(#lineGradient)"
-                strokeWidth="3"
-                fill="none"
-                className="drop-shadow-[0_0_10px_hsl(var(--primary)/0.5)]"
-              />
-            </svg>
-
             {/* Top Profile - Alex Chen */}
             <div className="absolute top-8 left-1/2 -translate-x-1/2 flex flex-col items-center">
               <div className="text-right mb-3 self-start -ml-24">
@@ -163,44 +144,18 @@ export function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Mobile Profile Images Section */}
+        {/* MIDDLE SECTION: Mobile Avatars (No Line, Side-by-Side) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="lg:hidden relative mt-6 md:mt-12 flex justify-center items-center min-h-[280px] sm:min-h-[320px]"
+          className="lg:hidden flex justify-center items-center gap-8 py-6"
         >
-          {/* Connecting Line SVG - Mobile (adjusted for smaller avatars) */}
-          <svg
-            className="absolute inset-0 w-full h-full"
-            viewBox="0 0 300 280"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <linearGradient id="lineGradientMobile" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="hsl(var(--primary))" />
-                <stop offset="100%" stopColor="hsl(var(--accent))" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M 80 70 L 80 110 L 180 180 L 180 230"
-              stroke="url(#lineGradientMobile)"
-              strokeWidth="2"
-              fill="none"
-              className="drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]"
-            />
-          </svg>
-
-          {/* Top Profile - Alex Chen */}
-          <div className="absolute top-0 left-6 sm:left-8 flex flex-col items-center">
-            <div className="text-left mb-1.5">
-              <p className="text-foreground font-semibold text-xs sm:text-sm">Alex Chen</p>
-              <p className="text-muted-foreground text-[10px] sm:text-xs">Senior Architect</p>
-            </div>
+          {/* Alex Chen */}
+          <div className="flex flex-col items-center">
             <div className="relative">
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/50 to-accent/50 blur-md scale-110" />
-              <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 sm:border-4 border-primary/30 ring-1 sm:ring-2 ring-accent/20 ring-offset-1 sm:ring-offset-2 ring-offset-background">
+              <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-3 border-primary/30 ring-2 ring-accent/20 ring-offset-2 ring-offset-background">
                 <img
                   src={profileAlex}
                   alt="Alex Chen - Senior Architect"
@@ -208,13 +163,17 @@ export function HeroSection() {
                 />
               </div>
             </div>
+            <div className="text-center mt-2">
+              <p className="text-foreground font-semibold text-sm">Alex Chen</p>
+              <p className="text-muted-foreground text-xs">Senior Architect</p>
+            </div>
           </div>
 
-          {/* Bottom Profile - Sarah Jenkins */}
-          <div className="absolute bottom-0 right-6 sm:right-8 flex flex-col items-center">
+          {/* Sarah Jenkins */}
+          <div className="flex flex-col items-center">
             <div className="relative">
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent/50 to-primary/50 blur-md scale-110" />
-              <div className="relative w-14 h-14 sm:w-18 sm:h-18 rounded-full overflow-hidden border-2 sm:border-4 border-accent/30 ring-1 sm:ring-2 ring-primary/20 ring-offset-1 sm:ring-offset-2 ring-offset-background">
+              <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-3 border-accent/30 ring-2 ring-primary/20 ring-offset-2 ring-offset-background">
                 <img
                   src={profileSarah}
                   alt="Sarah Jenkins - Talent Acquisition Lead"
@@ -222,16 +181,15 @@ export function HeroSection() {
                 />
               </div>
             </div>
-            <div className="text-center mt-1.5">
-              <p className="text-foreground font-semibold text-xs sm:text-sm">Sarah Jenkins</p>
-              <p className="text-muted-foreground text-[10px] sm:text-xs">Talent Acquisition Lead</p>
+            <div className="text-center mt-2">
+              <p className="text-foreground font-semibold text-sm">Sarah Jenkins</p>
+              <p className="text-muted-foreground text-xs">Talent Acquisition Lead</p>
             </div>
           </div>
         </motion.div>
 
-        {/* Logo Marquee */}
-        {/* Logo Marquee - pushed to bottom with mt-auto */}
-        <div className="mt-auto pt-4 md:pt-0">
+        {/* BOTTOM SECTION: Logo Marquee */}
+        <div className="pt-4 md:pt-0">
           <LogoMarquee />
         </div>
       </div>
