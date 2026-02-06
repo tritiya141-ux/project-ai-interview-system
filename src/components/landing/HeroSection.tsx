@@ -230,7 +230,10 @@ export function HeroSection() {
         </motion.div>
 
         {/* Logo Marquee */}
-        <LogoMarquee />
+        {/* Logo Marquee - pushed to bottom with mt-auto */}
+        <div className="mt-auto pt-4 md:pt-0">
+          <LogoMarquee />
+        </div>
       </div>
     </section>
   );
