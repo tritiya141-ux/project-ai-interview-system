@@ -168,7 +168,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="lg:hidden relative mt-12 flex justify-center items-center min-h-[400px]"
+          className="lg:hidden relative mt-6 md:mt-12 flex justify-center items-center min-h-[280px] sm:min-h-[320px]"
         >
           {/* Connecting Line SVG - Mobile */}
           <svg
