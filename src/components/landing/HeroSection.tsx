@@ -8,9 +8,7 @@ import profileSarah from "@/assets/profile-sarah.jpg";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex flex-col justify-between overflow-hidden px-4 py-20 pb-8 md:pb-20 bg-background">
-      {/* Dot Grid Pattern Background - on top of solid bg */}
-    <section className="relative min-h-screen flex items-center overflow-hidden px-4 py-20 bg-background">
+    <section className="relative min-h-screen flex flex-col justify-between overflow-hidden px-4 py-16 md:py-20 pb-6 md:pb-20 bg-background">
       {/* Dot Grid Pattern Background - on top of solid bg */}
       <div className="absolute inset-0 bg-dot-grid" />
       
