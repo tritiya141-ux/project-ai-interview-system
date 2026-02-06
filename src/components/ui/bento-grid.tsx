@@ -39,23 +39,23 @@ export function BentoCard({
   return (
     <div
       className={cn(
-        "group relative flex flex-col justify-between overflow-hidden rounded-xl cursor-pointer",
-        "bg-card border border-border/50",
+        "group relative flex flex-col justify-start overflow-hidden rounded-xl cursor-pointer",
+        "bg-card/60 backdrop-blur-sm border border-white/10",
         "transform-gpu transition-all duration-300 ease-out",
-        "hover:-translate-y-2 hover:border-primary/50 hover:shadow-[0_0_30px_-5px_hsl(var(--primary)/0.3)]",
+        "hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_0_20px_-5px_hsl(var(--primary)/0.25)]",
         className
       )}
     >
-      <div className="absolute inset-0 opacity-20 transition-opacity duration-300 group-hover:opacity-40">
+      <div className="absolute inset-0 opacity-30 transition-opacity duration-300 group-hover:opacity-50">
         {background}
       </div>
-      <div className="relative z-10 flex flex-col gap-4 p-6">
-        <div className="flex h-12 w-12 items-center justify-center rounded-lg gradient-primary transition-transform duration-300 group-hover:scale-110">
-          <Icon className="h-6 w-6 text-primary-foreground" />
+      <div className="relative z-10 flex flex-col gap-3 p-5">
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg gradient-primary transition-transform duration-300 group-hover:scale-110">
+          <Icon className="h-5 w-5 text-primary-foreground" />
         </div>
         <div>
-          <h3 className="text-xl font-semibold text-foreground transition-colors duration-300 group-hover:text-primary">{name}</h3>
-          <p className="mt-2 text-muted-foreground">{description}</p>
+          <h3 className="text-lg font-semibold text-foreground transition-colors duration-300 group-hover:text-primary">{name}</h3>
+          <p className="mt-1.5 text-sm text-muted-foreground line-clamp-3">{description}</p>
         </div>
       </div>
       <div className="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-primary/10 group-hover:to-transparent" />
