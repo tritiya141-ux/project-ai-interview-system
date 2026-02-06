@@ -54,7 +54,7 @@ export function HowItWorksSection() {
                 <div className="hidden md:block absolute top-12 left-[60%] w-[80%] h-px bg-gradient-to-r from-primary/50 to-accent/50" />
               )}
 
-              <div className="relative mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-card dark:bg-neutral-800 border border-border">
+              <div className="relative mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-card border border-border">
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20" />
                 <step.icon className="relative h-10 w-10 text-primary" />
                 <div className="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full gradient-primary text-sm font-bold text-primary-foreground">

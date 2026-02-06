@@ -58,7 +58,7 @@ const features = [
 
 export function FeaturesSection() {
   return (
-    <section id="features" className="relative min-h-screen py-24 px-4 bg-secondary dark:bg-neutral-900 rounded-t-[2.5rem] shadow-2xl">
+    <section id="features" className="relative min-h-screen py-24 px-4 bg-secondary rounded-t-[2.5rem] shadow-2xl">
       {/* Subtle dot grid pattern */}
       <div className="absolute inset-0 bg-dot-grid-light rounded-t-[2.5rem] pointer-events-none" />
       
