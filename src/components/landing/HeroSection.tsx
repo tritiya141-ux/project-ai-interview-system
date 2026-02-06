@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Search, Star, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Star, ArrowRight } from "lucide-react";
+import { MagicButton } from "@/components/ui/magic-button";
+import { LogoMarquee } from "@/components/landing/LogoMarquee";
 import profileAlex from "@/assets/profile-alex.jpg";
 import profileSarah from "@/assets/profile-sarah.jpg";
 
