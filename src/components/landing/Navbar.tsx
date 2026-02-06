@@ -27,15 +27,15 @@ export function Navbar() {
         layout
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         className={`
-          flex items-center justify-between rounded-full border shadow-lg
+          flex items-center justify-between rounded-full border shadow-lg gap-6
           ${isScrolled 
-            ? "max-w-xl w-full py-2 px-4 md:px-6 bg-background/60 backdrop-blur-xl border-border/20" 
-            : "max-w-3xl w-full py-3 px-6 md:px-8 bg-background/30 backdrop-blur-md border-border/10"
+            ? "max-w-4xl w-[90%] md:w-[65%] py-2.5 px-5 md:px-8 bg-background/70 backdrop-blur-xl border-border/20" 
+            : "max-w-5xl w-[95%] md:w-[75%] py-3.5 px-6 md:px-10 bg-background/30 backdrop-blur-md border-border/10"
           }
         `}
       >
         {/* Left - Brand Logo */}
-        <Link to="/" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2 shrink-0">
           <motion.div 
             layout
             className={`flex items-center justify-center rounded-lg gradient-primary ${isScrolled ? "h-7 w-7" : "h-8 w-8"}`}
@@ -44,49 +44,48 @@ export function Navbar() {
           </motion.div>
           <motion.span 
             layout
-            className={`font-bold gradient-text hidden sm:block ${isScrolled ? "text-lg" : "text-xl"}`}
+            className={`font-extrabold tracking-tight gradient-text ${isScrolled ? "text-base" : "text-lg md:text-xl"}`}
           >
-            InterviewAI
+            HireHand AI
           </motion.span>
         </Link>
 
-        {/* Center - Navigation Links (Desktop) */}
+        {/* Center - Navigation Links (Desktop only, hidden when scrolled on tablet) */}
         <motion.div 
           layout
-          className="hidden md:flex items-center gap-6"
+          className={`hidden items-center gap-8 ${isScrolled ? "lg:flex" : "md:flex"}`}
         >
           <a 
             href="#features" 
-            className={`text-muted-foreground hover:text-foreground transition-colors ${isScrolled ? "text-xs" : "text-sm"}`}
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
           >
             Features
           </a>
           <a 
             href="#testimonials" 
-            className={`text-muted-foreground hover:text-foreground transition-colors ${isScrolled ? "text-xs" : "text-sm"}`}
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
           >
             Testimonials
           </a>
           <a 
             href="#how-it-works" 
-            className={`text-muted-foreground hover:text-foreground transition-colors ${isScrolled ? "text-xs" : "text-sm"}`}
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
           >
             How It Works
           </a>
         </motion.div>
 
         {/* Right - Actions */}
-        <div className="flex items-center gap-2 md:gap-3">
+        <div className="flex items-center gap-3 shrink-0">
           <ThemeToggle />
           <Link to="/login">
             <motion.div layout>
               <Button
-                className={`rounded-full gradient-primary text-primary-foreground hover:opacity-90 ${
-                  isScrolled ? "px-4 py-1 text-xs h-8" : "px-5 md:px-6 text-sm h-9"
+                className={`rounded-full gradient-primary text-primary-foreground hover:opacity-90 whitespace-nowrap ${
+                  isScrolled ? "px-4 text-xs h-8" : "px-5 md:px-6 text-sm h-9"
                 }`}
               >
-                <span className="hidden sm:inline">Get Started</span>
-                <span className="sm:hidden">Start</span>
+                Get Started
               </Button>
             </motion.div>
           </Link>
