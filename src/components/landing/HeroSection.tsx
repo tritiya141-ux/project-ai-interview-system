@@ -228,6 +228,9 @@ export function HeroSection() {
             </div>
           </div>
         </motion.div>
+
+        {/* Logo Marquee */}
+        <LogoMarquee />
       </div>
     </section>
   );
