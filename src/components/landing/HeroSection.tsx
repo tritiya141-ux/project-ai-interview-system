@@ -193,14 +193,14 @@ export function HeroSection() {
           </svg>
 
           {/* Top Profile - Alex Chen */}
-          <div className="absolute top-0 left-8 flex flex-col items-center">
-            <div className="text-left mb-2">
-              <p className="text-foreground font-semibold text-sm">Alex Chen</p>
-              <p className="text-muted-foreground text-xs">Senior Architect</p>
+          <div className="absolute top-0 left-6 sm:left-8 flex flex-col items-center">
+            <div className="text-left mb-1.5">
+              <p className="text-foreground font-semibold text-xs sm:text-sm">Alex Chen</p>
+              <p className="text-muted-foreground text-[10px] sm:text-xs">Senior Architect</p>
             </div>
             <div className="relative">
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/50 to-accent/50 blur-md scale-110" />
-              <div className="relative w-28 h-28 rounded-full overflow-hidden border-4 border-primary/30 ring-2 ring-accent/20 ring-offset-2 ring-offset-background">
+              <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 sm:border-4 border-primary/30 ring-1 sm:ring-2 ring-accent/20 ring-offset-1 sm:ring-offset-2 ring-offset-background">
                 <img
                   src={profileAlex}
                   alt="Alex Chen - Senior Architect"
