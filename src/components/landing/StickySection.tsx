@@ -33,8 +33,18 @@ export function StickySection({ children, className = "", zIndex, isLast = false
   return (
     <div 
       ref={sectionRef}
-      className="sticky top-0 w-full will-change-transform"
-      style={{ zIndex }}
+      className="sticky-section w-full will-change-transform"
+      style={{ 
+        position: 'sticky',
+        /* Critical fix: This formula ensures the section only sticks when its 
+           BOTTOM edge touches the viewport bottom. Allows scrolling through 
+           entire content of tall sections before freezing. */
+        top: 'calc(100vh - 100%)',
+        zIndex,
+        minHeight: '100vh',
+        boxShadow: '0 -10px 40px rgba(0,0,0,0.5)',
+        borderTop: '1px solid rgba(255,255,255,0.05)',
+      }}
     >
       <motion.div
         style={isLast ? {} : transforms}
