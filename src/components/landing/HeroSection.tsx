@@ -90,8 +90,8 @@ export function HeroSection() {
                     />
                   ))}
                 </div>
-                <span className="text-foreground font-semibold">4.5/5</span>
-                <span className="text-muted-foreground">(14k Reviews)</span>
+                <span className="text-foreground font-semibold text-sm md:text-base">4.5/5</span>
+                <span className="text-muted-foreground text-sm md:text-base">(14k Reviews)</span>
               </div>
             </motion.div>
           </motion.div>
