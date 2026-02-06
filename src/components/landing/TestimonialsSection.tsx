@@ -78,7 +78,7 @@ export function TestimonialsSection() {
           </div>
 
           {/* Right Column - Offset */}
-          <div className="space-y-8 md:pt-16">
+          <div className="space-y-4 md:space-y-8 md:pt-16">
             {/* Card 2 - Top Right */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
