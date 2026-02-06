@@ -58,8 +58,11 @@ const features = [
 
 export function FeaturesSection() {
   return (
-    <section className="relative py-20 px-4">
-      <div className="mx-auto max-w-6xl">
+    <section id="features" className="relative min-h-screen py-24 px-4 bg-muted/50 rounded-t-[2.5rem] shadow-2xl">
+      {/* Subtle dot grid pattern */}
+      <div className="absolute inset-0 bg-dot-grid-light rounded-t-[2.5rem]" />
+      
+      <div className="relative z-10 mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -67,8 +70,9 @@ export function FeaturesSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl font-bold sm:text-4xl lg:text-5xl">
-            <span className="gradient-text">Powerful Features</span>
+          <h2 className="font-display text-4xl font-bold sm:text-5xl lg:text-6xl tracking-tight">
+            <span className="text-foreground">Powerful</span>{" "}
+            <span className="text-muted-foreground/40">Features.</span>
           </h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
             Everything you need to streamline your interview process and find the best candidates.
