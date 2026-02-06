@@ -81,12 +81,12 @@ export function HeroSection() {
               <p className="text-muted-foreground font-medium">
                 Trusted by <span className="text-foreground">50k+ users</span>
               </p>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 md:gap-2">
                 <div className="flex items-center">
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
-                      className={`h-5 w-5 ${i < 4 ? "fill-primary text-primary" : "fill-primary/50 text-primary/50"}`}
+                      className={`h-4 w-4 md:h-5 md:w-5 ${i < 4 ? "fill-primary text-primary" : "fill-primary/50 text-primary/50"}`}
                     />
                   ))}
                 </div>
