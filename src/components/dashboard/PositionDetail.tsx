@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
@@ -19,11 +19,15 @@ import {
   Lock,
   FolderOpen,
   Settings,
+  Edit3,
+  Upload,
+  Sparkles,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { PositionData, loadPositions } from "@/types/positions";
+import { Textarea } from "@/components/ui/textarea";
+import { PositionData, PositionJD, loadPositions, savePositions } from "@/types/positions";
 
 const TABS = [
   { id: "overview", label: "Overview", icon: Briefcase },
@@ -44,10 +48,18 @@ interface PositionDetailProps {
 
 export function PositionDetail({ positionId, onBack }: PositionDetailProps) {
   const [activeTab, setActiveTab] = useState("overview");
+  const [positions, setPositions] = useState(() => loadPositions());
 
   const position = useMemo(() => {
-    const all = loadPositions();
-    return all.find((p) => p.id === positionId) || null;
+    return positions.find((p) => p.id === positionId) || null;
+  }, [positionId, positions]);
+
+  const handleJDSaved = useCallback((jd: PositionJD) => {
+    setPositions((prev) => {
+      const updated = prev.map((p) => p.id === positionId ? { ...p, jd, jdChoice: "create" as const } : p);
+      savePositions(updated);
+      return updated;
+    });
   }, [positionId]);
 
   if (!position) {
@@ -111,7 +123,7 @@ export function PositionDetail({ positionId, onBack }: PositionDetailProps) {
 
       {/* Tab Content */}
       {activeTab === "overview" && <OverviewTab position={position} />}
-      {activeTab === "jd" && <JDTab position={position} />}
+      {activeTab === "jd" && <JDTab position={position} onJDSaved={handleJDSaved} />}
       {!["overview", "jd"].includes(activeTab) && (
         <Card className="glass-strong">
           <CardContent className="p-12 text-center">
@@ -188,19 +200,94 @@ function OverviewTab({ position }: { position: PositionData }) {
   );
 }
 
-function JDTab({ position }: { position: PositionData }) {
+function JDTab({ position, onJDSaved }: { position: PositionData; onJDSaved: (jd: PositionJD) => void }) {
+  const [jdView, setJdView] = useState<"choice" | "paste">("choice");
+  const [jdText, setJdText] = useState("");
+
+  const handleSaveJD = () => {
+    if (!jdText.trim()) return;
+    const newJD: PositionJD = {
+      purpose: jdText.trim(),
+      education: ["As described in the job description"],
+      experience: ["As described in the job description"],
+      responsibilities: ["As described in the job description"],
+      skills: ["See full JD for details"],
+    };
+    onJDSaved(newJD);
+  };
+
+  // No JD — show choice or paste view
   if (!position.jd) {
+    if (jdView === "paste") {
+      return (
+        <Card className="glass-strong">
+          <CardContent className="p-6 space-y-4">
+            <div className="flex items-center gap-2 mb-2">
+              <Edit3 className="h-4 w-4 text-primary" />
+              <h3 className="text-sm font-semibold text-foreground font-display">Paste Job Description</h3>
+            </div>
+            <Textarea
+              placeholder="Paste your full job description here..."
+              value={jdText}
+              onChange={(e) => setJdText(e.target.value)}
+              className="min-h-[250px] bg-background/50 border-border/50 focus:border-primary text-sm text-foreground placeholder:text-muted-foreground resize-none"
+            />
+            <div className="flex items-center justify-end gap-3">
+              <Button variant="ghost" onClick={() => setJdView("choice")}>Back</Button>
+              <Button
+                onClick={handleSaveJD}
+                disabled={!jdText.trim()}
+                className="gradient-primary text-primary-foreground font-semibold rounded-lg hover:opacity-90"
+              >
+                <Sparkles className="h-4 w-4 mr-1" />
+                Generate & Save
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      );
+    }
+
+    // Choice view
     return (
       <Card className="glass-strong">
-        <CardContent className="p-12 text-center">
-          <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-          <p className="text-lg font-semibold text-foreground font-display">No Job Description Yet</p>
-          <p className="text-sm text-muted-foreground mt-1">Create or upload a JD to see it here.</p>
+        <CardContent className="p-12">
+          <div className="text-center mb-8">
+            <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+            <p className="text-lg font-semibold text-foreground font-display">No Job Description Yet</p>
+            <p className="text-sm text-muted-foreground mt-1">Choose how you'd like to add one.</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg mx-auto">
+            <button
+              onClick={() => setJdView("paste")}
+              className="flex flex-col items-center gap-3 p-6 rounded-xl border border-border/40 hover:border-primary/50 hover:bg-primary/5 transition-all duration-200 group"
+            >
+              <div className="flex h-14 w-14 items-center justify-center rounded-xl gradient-primary group-hover:glow-sm transition-all">
+                <Edit3 className="h-6 w-6 text-primary-foreground" />
+              </div>
+              <div className="text-center">
+                <p className="font-semibold text-foreground text-sm">Paste JD</p>
+                <p className="text-xs text-muted-foreground mt-1">Write or paste text</p>
+              </div>
+            </button>
+            <button
+              className="flex flex-col items-center gap-3 p-6 rounded-xl border border-border/40 hover:border-primary/50 hover:bg-primary/5 transition-all duration-200 group"
+            >
+              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-muted group-hover:bg-muted/80 transition-all">
+                <Upload className="h-6 w-6 text-muted-foreground" />
+              </div>
+              <div className="text-center">
+                <p className="font-semibold text-foreground text-sm">Upload JD</p>
+                <p className="text-xs text-muted-foreground mt-1">Upload a document</p>
+              </div>
+            </button>
+          </div>
         </CardContent>
       </Card>
     );
   }
 
+  // JD exists — render it
   const jd = position.jd;
 
   return (
@@ -212,7 +299,7 @@ function JDTab({ position }: { position: PositionData }) {
             <Briefcase className="h-4 w-4 text-primary" />
             <h3 className="text-sm font-semibold text-foreground font-display">Role Purpose</h3>
           </div>
-          <p className="text-sm text-muted-foreground leading-relaxed">{jd.purpose}</p>
+          <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-wrap">{jd.purpose}</p>
         </CardContent>
       </Card>
 

@@ -66,21 +66,26 @@ export function DashboardHome({ onViewPosition }: DashboardHomeProps) {
   const [modalStep, setModalStep] = useState<ModalStep>("form");
   const [createdPosition, setCreatedPosition] = useState<PositionData | null>(null);
   const [form, setForm] = useState({ title: "", bu: "", location: "", level: "Mid" });
+  const [statusFilter, setStatusFilter] = useState<"Active" | "Closed">("Active");
 
   useEffect(() => {
     savePositions(positions);
   }, [positions]);
 
+  const filteredPositions = useMemo(() => positions.filter((p) => p.status === statusFilter), [positions, statusFilter]);
+  const openCount = useMemo(() => positions.filter((p) => p.status === "Active").length, [positions]);
+  const closedCount = useMemo(() => positions.filter((p) => p.status === "Closed").length, [positions]);
+
   const kpiData = useMemo(() => {
     const totalCandidates = positions.reduce((s, p) => s + p.candidates, 0);
     const totalShortlisted = positions.reduce((s, p) => s + p.shortlisted, 0);
     return [
-      { label: "Open Positions", value: String(positions.length), icon: Briefcase, sub: "Active roles", trend: null },
+      { label: "Open Positions", value: String(openCount), icon: Briefcase, sub: "Active roles", trend: null },
       { label: "Total Candidates", value: String(totalCandidates), icon: Users, sub: `${totalShortlisted} shortlisted`, trend: null },
       { label: "Avg Time to Fill", value: "45 days", icon: Clock, sub: "+12%", trend: "up" },
       { label: "Offer Acceptance", value: "82%", icon: CheckCircle, sub: "+5%", trend: "up" },
     ];
-  }, [positions]);
+  }, [positions, openCount]);
 
   const handleCreate = () => {
     if (!form.title.trim()) return;
@@ -122,6 +127,16 @@ export function DashboardHome({ onViewPosition }: DashboardHomeProps) {
       onViewPosition(createdPosition.id);
     }
     closeModal();
+  };
+
+  const toggleStatus = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setPositions((prev) => {
+      const updated = prev.map((p) =>
+        p.id === id ? { ...p, status: p.status === "Active" ? "Closed" : "Active" } : p
+      );
+      return updated;
+    });
   };
 
   const closeModal = () => {
@@ -185,7 +200,31 @@ export function DashboardHome({ onViewPosition }: DashboardHomeProps) {
 
         {/* Positions Table */}
         <motion.div variants={item}>
-          <h2 className="text-lg font-semibold text-foreground mb-3 font-display">Open Positions</h2>
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-lg font-semibold text-foreground font-display">Positions</h2>
+            <div className="flex items-center rounded-lg border border-border/40 overflow-hidden">
+              <button
+                onClick={() => setStatusFilter("Active")}
+                className={`px-4 py-1.5 text-sm font-medium transition-all ${
+                  statusFilter === "Active"
+                    ? "bg-primary/15 text-primary"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                Open ({openCount})
+              </button>
+              <button
+                onClick={() => setStatusFilter("Closed")}
+                className={`px-4 py-1.5 text-sm font-medium transition-all ${
+                  statusFilter === "Closed"
+                    ? "bg-primary/15 text-primary"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                Closed ({closedCount})
+              </button>
+            </div>
+          </div>
           <Card className="glass-strong overflow-hidden">
             <Table>
               <TableHeader>
@@ -197,12 +236,12 @@ export function DashboardHome({ onViewPosition }: DashboardHomeProps) {
                   <TableHead className="text-muted-foreground font-medium text-center">Candidates</TableHead>
                   <TableHead className="text-muted-foreground font-medium text-center hidden sm:table-cell">Shortlisted</TableHead>
                   <TableHead className="text-muted-foreground font-medium hidden md:table-cell">Risk Flags</TableHead>
-                  <TableHead className="text-muted-foreground font-medium">SLA</TableHead>
+                  <TableHead className="text-muted-foreground font-medium">Status</TableHead>
                   <TableHead className="text-muted-foreground font-medium hidden lg:table-cell">Updated</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {positions.map((pos) => (
+                {filteredPositions.map((pos) => (
                   <TableRow
                     key={pos.id}
                     onClick={() => onViewPosition(pos.id)}
@@ -230,16 +269,28 @@ export function DashboardHome({ onViewPosition }: DashboardHomeProps) {
                       )}
                     </TableCell>
                     <TableCell>
-                      <Badge className={`text-xs ${
-                        pos.slaLevel === "success" ? "bg-emerald-500/15 text-emerald-400 border-emerald-500/30"
-                        : "bg-yellow-500/15 text-yellow-400 border-yellow-500/30"
-                      }`} variant="outline">
-                        {pos.sla}
+                      <Badge
+                        onClick={(e) => toggleStatus(pos.id, e)}
+                        className={`text-xs cursor-pointer transition-all hover:opacity-80 ${
+                          pos.status === "Active"
+                            ? "bg-emerald-500/15 text-emerald-400 border-emerald-500/30"
+                            : "bg-muted text-muted-foreground border-border/50"
+                        }`}
+                        variant="outline"
+                      >
+                        {pos.status === "Active" ? "Open" : "Closed"}
                       </Badge>
                     </TableCell>
                     <TableCell className="text-muted-foreground text-xs hidden lg:table-cell">{pos.updated}</TableCell>
                   </TableRow>
                 ))}
+                {filteredPositions.length === 0 && (
+                  <TableRow>
+                    <TableCell colSpan={9} className="text-center py-8 text-muted-foreground">
+                      No {statusFilter === "Active" ? "open" : "closed"} positions.
+                    </TableCell>
+                  </TableRow>
+                )}
               </TableBody>
             </Table>
           </Card>
