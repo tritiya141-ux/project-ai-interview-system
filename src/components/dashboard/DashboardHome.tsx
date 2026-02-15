@@ -20,6 +20,8 @@ import {
   Eye,
   XCircle,
   RotateCcw,
+  Pencil,
+  Trash2,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -56,6 +58,7 @@ import {
 } from "@/types/positions";
 
 type ModalStep = "form" | "success";
+type ModalMode = "create" | "edit";
 
 interface DashboardHomeProps {
   onViewPosition: (id: string) => void;
@@ -74,6 +77,8 @@ export function DashboardHome({ onViewPosition }: DashboardHomeProps) {
   const [positions, setPositions] = useState<PositionData[]>(loadPositions);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalStep, setModalStep] = useState<ModalStep>("form");
+  const [modalMode, setModalMode] = useState<ModalMode>("create");
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [createdPosition, setCreatedPosition] = useState<PositionData | null>(null);
   const [form, setForm] = useState({ title: "", bu: "", location: "", level: "Mid" });
   const [statusFilter, setStatusFilter] = useState<"Active" | "Closed">("Active");
@@ -145,9 +150,53 @@ export function DashboardHome({ onViewPosition }: DashboardHomeProps) {
     );
   };
 
+  const openCreateModal = () => {
+    setModalMode("create");
+    setEditingId(null);
+    setForm({ title: "", bu: "", location: "", level: "Mid" });
+    setModalStep("form");
+    setModalOpen(true);
+  };
+
+  const openEditModal = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    const pos = positions.find((p) => p.id === id);
+    if (!pos) return;
+    setModalMode("edit");
+    setEditingId(id);
+    setForm({
+      title: pos.title,
+      bu: pos.department,
+      location: pos.location,
+      level: pos.level,
+    });
+    setModalStep("form");
+    setModalOpen(true);
+  };
+
+  const handleSaveEdit = () => {
+    if (!editingId || !form.title.trim()) return;
+    setPositions((prev) =>
+      prev.map((p) =>
+        p.id === editingId
+          ? { ...p, title: form.title.trim(), department: form.bu || "General", location: form.location || "Remote", level: form.level, updated: new Date().toISOString().slice(0, 10) }
+          : p
+      )
+    );
+    closeModal();
+  };
+
+  const deletePosition = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!window.confirm("Are you sure you want to delete this position? This action cannot be undone.")) return;
+    setPositions((prev) => prev.filter((p) => p.id !== id));
+  };
+
   const closeModal = () => {
     setModalOpen(false);
     setModalStep("form");
+    setModalMode("create");
+    setEditingId(null);
     setCreatedPosition(null);
     setForm({ title: "", bu: "", location: "", level: "Mid" });
   };
@@ -185,7 +234,7 @@ export function DashboardHome({ onViewPosition }: DashboardHomeProps) {
           <h2 className="text-lg font-semibold text-foreground mb-3 font-display">Quick Actions</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
-              { label: "Create a Position", icon: Plus, desc: "Post a new role", action: () => setModalOpen(true) },
+              { label: "Create a Position", icon: Plus, desc: "Post a new role", action: () => openCreateModal() },
               { label: "View Analytics", icon: BarChart3, desc: "Hiring insights", action: undefined },
               { label: "Decision Packs", icon: Package, desc: "Review bundles", action: undefined },
             ].map((qa) => (
@@ -299,12 +348,18 @@ export function DashboardHome({ onViewPosition }: DashboardHomeProps) {
                           <DropdownMenuItem onClick={(e) => { e.stopPropagation(); onViewPosition(pos.id); }}>
                             <Eye className="h-4 w-4 mr-2" /> View Details
                           </DropdownMenuItem>
+                          <DropdownMenuItem onClick={(e) => openEditModal(pos.id, e)}>
+                            <Pencil className="h-4 w-4 mr-2" /> Edit Position
+                          </DropdownMenuItem>
                           <DropdownMenuItem onClick={(e) => { e.stopPropagation(); updateStatus(pos.id, pos.status === "Active" ? "Closed" : "Active"); }}>
                             {pos.status === "Active" ? (
                               <><XCircle className="h-4 w-4 mr-2" /> Mark as Closed</>
                             ) : (
                               <><RotateCcw className="h-4 w-4 mr-2" /> Re-open Position</>
                             )}
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={(e) => deletePosition(pos.id, e)} className="text-red-400 focus:text-red-400 focus:bg-red-500/10">
+                            <Trash2 className="h-4 w-4 mr-2" /> Delete Position
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
@@ -348,12 +403,12 @@ export function DashboardHome({ onViewPosition }: DashboardHomeProps) {
                     {/* Header */}
                     <div className="flex items-center justify-between p-6 border-b border-border/30">
                       <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl gradient-primary">
-                          <Plus className="h-5 w-5 text-primary-foreground" />
+                         <div className="flex h-10 w-10 items-center justify-center rounded-xl gradient-primary">
+                          {modalMode === "edit" ? <Pencil className="h-5 w-5 text-primary-foreground" /> : <Plus className="h-5 w-5 text-primary-foreground" />}
                         </div>
                         <div>
-                          <h3 className="text-lg font-bold text-foreground font-display">Create Position</h3>
-                          <p className="text-xs text-muted-foreground">Add a new open role</p>
+                          <h3 className="text-lg font-bold text-foreground font-display">{modalMode === "edit" ? "Edit Position" : "Create Position"}</h3>
+                          <p className="text-xs text-muted-foreground">{modalMode === "edit" ? "Update position details" : "Add a new open role"}</p>
                         </div>
                       </div>
                       <Button variant="ghost" size="icon" onClick={closeModal} className="rounded-full">
@@ -389,10 +444,17 @@ export function DashboardHome({ onViewPosition }: DashboardHomeProps) {
                     </div>
                     <div className="flex items-center justify-end gap-3 p-6 border-t border-border/30">
                       <Button variant="ghost" onClick={closeModal}>Cancel</Button>
-                      <Button onClick={handleCreate} disabled={!form.title.trim()} className="gradient-primary text-primary-foreground font-semibold rounded-lg hover:opacity-90">
-                        <Sparkles className="h-4 w-4 mr-1" />
-                        Create Position
-                      </Button>
+                      {modalMode === "edit" ? (
+                        <Button onClick={handleSaveEdit} disabled={!form.title.trim()} className="gradient-primary text-primary-foreground font-semibold rounded-lg hover:opacity-90">
+                          <Pencil className="h-4 w-4 mr-1" />
+                          Save Changes
+                        </Button>
+                      ) : (
+                        <Button onClick={handleCreate} disabled={!form.title.trim()} className="gradient-primary text-primary-foreground font-semibold rounded-lg hover:opacity-90">
+                          <Sparkles className="h-4 w-4 mr-1" />
+                          Create Position
+                        </Button>
+                      )}
                     </div>
                   </motion.div>
                 ) : (
