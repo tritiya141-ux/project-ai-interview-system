@@ -16,6 +16,10 @@ import {
   Upload,
   ArrowRight,
   CheckCircle2,
+  MoreVertical,
+  Eye,
+  XCircle,
+  RotateCcw,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -29,6 +33,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -129,14 +139,10 @@ export function DashboardHome({ onViewPosition }: DashboardHomeProps) {
     closeModal();
   };
 
-  const toggleStatus = (id: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setPositions((prev) => {
-      const updated = prev.map((p) =>
-        p.id === id ? { ...p, status: p.status === "Active" ? "Closed" : "Active" } : p
-      );
-      return updated;
-    });
+  const updateStatus = (id: string, newStatus: string) => {
+    setPositions((prev) =>
+      prev.map((p) => p.id === id ? { ...p, status: newStatus } : p)
+    );
   };
 
   const closeModal = () => {
@@ -238,6 +244,7 @@ export function DashboardHome({ onViewPosition }: DashboardHomeProps) {
                   <TableHead className="text-muted-foreground font-medium hidden md:table-cell">Risk Flags</TableHead>
                   <TableHead className="text-muted-foreground font-medium">Status</TableHead>
                   <TableHead className="text-muted-foreground font-medium hidden lg:table-cell">Updated</TableHead>
+                  <TableHead className="text-muted-foreground font-medium w-12">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -270,8 +277,7 @@ export function DashboardHome({ onViewPosition }: DashboardHomeProps) {
                     </TableCell>
                     <TableCell>
                       <Badge
-                        onClick={(e) => toggleStatus(pos.id, e)}
-                        className={`text-xs cursor-pointer transition-all hover:opacity-80 ${
+                        className={`text-xs ${
                           pos.status === "Active"
                             ? "bg-emerald-500/15 text-emerald-400 border-emerald-500/30"
                             : "bg-muted text-muted-foreground border-border/50"
@@ -282,11 +288,32 @@ export function DashboardHome({ onViewPosition }: DashboardHomeProps) {
                       </Badge>
                     </TableCell>
                     <TableCell className="text-muted-foreground text-xs hidden lg:table-cell">{pos.updated}</TableCell>
+                    <TableCell>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
+                          <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full">
+                            <MoreVertical className="h-4 w-4 text-muted-foreground" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end" className="bg-card border-border/50 z-50">
+                          <DropdownMenuItem onClick={(e) => { e.stopPropagation(); onViewPosition(pos.id); }}>
+                            <Eye className="h-4 w-4 mr-2" /> View Details
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={(e) => { e.stopPropagation(); updateStatus(pos.id, pos.status === "Active" ? "Closed" : "Active"); }}>
+                            {pos.status === "Active" ? (
+                              <><XCircle className="h-4 w-4 mr-2" /> Mark as Closed</>
+                            ) : (
+                              <><RotateCcw className="h-4 w-4 mr-2" /> Re-open Position</>
+                            )}
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
                   </TableRow>
                 ))}
                 {filteredPositions.length === 0 && (
                   <TableRow>
-                    <TableCell colSpan={9} className="text-center py-8 text-muted-foreground">
+                    <TableCell colSpan={10} className="text-center py-8 text-muted-foreground">
                       No {statusFilter === "Active" ? "open" : "closed"} positions.
                     </TableCell>
                   </TableRow>
