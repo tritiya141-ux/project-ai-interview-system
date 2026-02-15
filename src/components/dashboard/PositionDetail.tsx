@@ -27,7 +27,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { PositionData, PositionJD, loadPositions, savePositions } from "@/types/positions";
+import { PositionData, PositionJD, CandidateData, loadPositions, savePositions } from "@/types/positions";
+import { CandidatesTab } from "@/components/dashboard/CandidatesTab";
 
 const TABS = [
   { id: "overview", label: "Overview", icon: Briefcase },
@@ -57,6 +58,18 @@ export function PositionDetail({ positionId, onBack }: PositionDetailProps) {
   const handleJDSaved = useCallback((jd: PositionJD) => {
     setPositions((prev) => {
       const updated = prev.map((p) => p.id === positionId ? { ...p, jd, jdChoice: "create" as const } : p);
+      savePositions(updated);
+      return updated;
+    });
+  }, [positionId]);
+
+  const handleAddCandidate = useCallback((candidate: CandidateData) => {
+    setPositions((prev) => {
+      const updated = prev.map((p) => {
+        if (p.id !== positionId) return p;
+        const list = [...(p.candidatesList || []), candidate];
+        return { ...p, candidatesList: list, candidates: list.length, stats: { ...p.stats, candidates: list.length } };
+      });
       savePositions(updated);
       return updated;
     });
@@ -94,7 +107,7 @@ export function PositionDetail({ positionId, onBack }: PositionDetailProps) {
           <Button variant="outline" size="sm" className="border-border/50">
             <Download className="h-4 w-4 mr-1" /> Board Pack
           </Button>
-          <Button size="sm" className="gradient-primary text-primary-foreground">
+          <Button size="sm" className="gradient-primary text-primary-foreground" onClick={() => setActiveTab("candidates")}>
             <UserPlus className="h-4 w-4 mr-1" /> Add Candidate
           </Button>
         </div>
@@ -124,7 +137,10 @@ export function PositionDetail({ positionId, onBack }: PositionDetailProps) {
       {/* Tab Content */}
       {activeTab === "overview" && <OverviewTab position={position} />}
       {activeTab === "jd" && <JDTab position={position} onJDSaved={handleJDSaved} />}
-      {!["overview", "jd"].includes(activeTab) && (
+      {activeTab === "candidates" && (
+        <CandidatesTab candidates={position.candidatesList || []} onAddCandidate={handleAddCandidate} />
+      )}
+      {!["overview", "jd", "candidates"].includes(activeTab) && (
         <Card className="glass-strong">
           <CardContent className="p-12 text-center">
             <div className="flex h-16 w-16 mx-auto items-center justify-center rounded-2xl bg-muted mb-4">

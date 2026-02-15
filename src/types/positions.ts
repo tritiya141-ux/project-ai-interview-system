@@ -1,3 +1,20 @@
+export interface CandidateScores {
+  resume: number;
+  psych: number;
+  composite: number;
+}
+
+export interface CandidateData {
+  id: string;
+  name: string;
+  role: string;
+  email: string;
+  stage: string;
+  scores: CandidateScores;
+  verdict: "Go" | "Conditional" | "No-Go";
+  addedDate: string;
+}
+
 export interface PositionJD {
   purpose: string;
   education: string[];
@@ -30,6 +47,7 @@ export interface PositionData {
   sla: string;
   slaLevel: string;
   updated: string;
+  candidatesList?: CandidateData[];
 }
 
 const POSITIONS_KEY = "hirehand-positions-v2";
@@ -67,6 +85,14 @@ const MOCK_JD: PositionJD = {
   ],
 };
 
+const MOCK_CANDIDATES: CandidateData[] = [
+  { id: "cand-101", name: "James Morrison", role: "Senior Dev @ TechCorp", email: "james@techcorp.com", stage: "Interview L2", scores: { resume: 8.2, psych: 7.8, composite: 80 }, verdict: "Go", addedDate: "2024-12-10" },
+  { id: "cand-102", name: "Priya Sharma", role: "Staff Engineer @ InnovateTech", email: "priya@innovatetech.com", stage: "Interview L2", scores: { resume: 9.1, psych: 8.5, composite: 88 }, verdict: "Go", addedDate: "2024-12-08" },
+  { id: "cand-103", name: "Alex Chen", role: "Backend Lead @ DataFlow", email: "alex@dataflow.io", stage: "Screened", scores: { resume: 7.4, psych: 7.1, composite: 73 }, verdict: "Conditional", addedDate: "2024-12-12" },
+  { id: "cand-104", name: "Sarah Williams", role: "SDE III @ CloudBase", email: "sarah@cloudbase.com", stage: "Sourced", scores: { resume: 6.8, psych: 6.5, composite: 67 }, verdict: "No-Go", addedDate: "2024-12-14" },
+  { id: "cand-105", name: "Rahul Patel", role: "Principal Eng @ ScaleUp", email: "rahul@scaleup.io", stage: "Interview L1", scores: { resume: 8.7, psych: 8.0, composite: 84 }, verdict: "Conditional", addedDate: "2024-12-11" },
+];
+
 export const DEFAULT_POSITIONS: PositionData[] = [
   {
     id: "REQ-2024-0042",
@@ -85,6 +111,7 @@ export const DEFAULT_POSITIONS: PositionData[] = [
     sla: "At Risk",
     slaLevel: "warning",
     updated: "2024-12-15",
+    candidatesList: MOCK_CANDIDATES,
   },
   {
     id: "REQ-2024-0039",
@@ -103,6 +130,10 @@ export const DEFAULT_POSITIONS: PositionData[] = [
     sla: "On Track",
     slaLevel: "success",
     updated: "2024-12-14",
+    candidatesList: [
+      { id: "cand-201", name: "Emily Zhang", role: "Sr PM @ MetaVerse", email: "emily@metaverse.com", stage: "Interview L1", scores: { resume: 8.5, psych: 7.9, composite: 82 }, verdict: "Go", addedDate: "2024-12-09" },
+      { id: "cand-202", name: "David Kim", role: "Product Lead @ Stripe", email: "david@stripe.com", stage: "Screened", scores: { resume: 7.8, psych: 7.2, composite: 75 }, verdict: "Conditional", addedDate: "2024-12-11" },
+    ],
   },
   {
     id: "REQ-2024-0045",
@@ -121,6 +152,7 @@ export const DEFAULT_POSITIONS: PositionData[] = [
     sla: "On Track",
     slaLevel: "success",
     updated: "2024-12-13",
+    candidatesList: [],
   },
 ];
 
@@ -139,6 +171,18 @@ export function savePositions(data: PositionData[]) {
 export function generateReqId() {
   const num = Math.floor(1000 + Math.random() * 9000);
   return `REQ-2024-${num}`;
+}
+
+export function generateCandidateId() {
+  return `cand-${Math.floor(100 + Math.random() * 900)}`;
+}
+
+export function generateAIScores(): { scores: CandidateScores; verdict: "Go" | "Conditional" | "No-Go" } {
+  const resume = +(6.0 + Math.random() * 3.5).toFixed(1);
+  const psych = +(6.0 + Math.random() * 3.0).toFixed(1);
+  const composite = Math.round(((resume + psych) / 2) * 10);
+  const verdict = composite >= 85 ? "Go" : composite >= 70 ? "Conditional" : "No-Go";
+  return { scores: { resume, psych, composite }, verdict };
 }
 
 export function createMockJD(title: string): PositionJD {
